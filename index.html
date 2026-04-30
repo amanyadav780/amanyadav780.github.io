@@ -41,7 +41,7 @@ body{
 /* NAV */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
-  display:flex;justify-content:space-between;align-items:center;
+  display:flex;justify-content:center;align-items:center;
   padding:1.2rem 5rem;
   background:rgba(6,8,16,0.8);
   backdrop-filter:blur(16px);
@@ -347,14 +347,12 @@ footer{
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">aman.dev</div>
   <ul class="nav-links">
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="mailto:aman.connect.in@gmail.com" class="nav-cta">Hire Me</a>
 </nav>
 
 <!-- HERO -->
@@ -369,9 +367,8 @@ footer{
   </div>
 
   <h1>
-    Aman<br/>
-    <span class="line2">Yadav</span><br/>
-    <span class="line3">Flutter Dev</span>
+    <span style="font-size:clamp(1.8rem,4vw,3rem);letter-spacing:-1px;display:block;margin-bottom:0.3rem;font-weight:600;">Aman Yadav</span>
+    <span style="display:block;white-space:nowrap;"><span class="line2">Senior Flutter </span><span class="line3">Developer</span></span>
   </h1>
 
   <div class="hero-meta">
@@ -704,54 +701,35 @@ footer{
 <!-- CONTACT -->
 <section id="contact" style="padding:0 0 4rem">
   <div class="contact-section">
-    <div class="contact-grid">
-      <div>
-        <div class="s-label">Let's Connect</div>
-        <h2 class="s-title">Open to new projects & roles</h2>
-        <p style="color:var(--muted);font-size:0.95rem;margin-bottom:2rem">Whether you're building a mobile product from scratch or scaling an existing Flutter app — I'd love to hear about it.</p>
-        <div class="contact-links">
-          <a href="mailto:aman.connect.in@gmail.com" class="contact-link">
-            <span class="contact-link-icon">✉️</span>
-            <div><span class="contact-link-label">Email</span><span class="contact-link-val">aman.connect.in@gmail.com</span></div>
-          </a>
-          <a href="tel:+916283383829" class="contact-link">
-            <span class="contact-link-icon">📞</span>
-            <div><span class="contact-link-label">Phone</span><span class="contact-link-val">+91 6283383829</span></div>
-          </a>
-          <a href="https://linkedin.com/in/aman-yadav-5a78711a1" target="_blank" class="contact-link">
-            <span class="contact-link-icon">💼</span>
-            <div><span class="contact-link-label">LinkedIn</span><span class="contact-link-val">aman-yadav-5a78711a1</span></div>
-          </a>
-          <a href="https://github.com/amanyadav70780" target="_blank" class="contact-link">
-            <span class="contact-link-icon">🐙</span>
-            <div><span class="contact-link-label">GitHub</span><span class="contact-link-val">amanyadav70780</span></div>
-          </a>
-        </div>
-      </div>
-      <div>
-        <div class="contact-form">
-          <div class="form-row">
-            <div class="form-group">
-              <label>Name</label>
-              <input type="text" placeholder="Your name"/>
-            </div>
-            <div class="form-group">
-              <label>Email</label>
-              <input type="email" placeholder="your@email.com"/>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Subject</label>
-            <input type="text" placeholder="e.g. Flutter project opportunity"/>
-          </div>
-          <div class="form-group">
-            <label>Message</label>
-            <textarea placeholder="Tell me about your project or role..."></textarea>
-          </div>
-          <div>
-            <button class="btn-primary" style="width:100%;justify-content:center">Send Message →</button>
-          </div>
-        </div>
+    <div class="s-label">Let's Connect</div>
+    <h2 class="s-title" style="max-width:700px">Got a Flutter project? <br/>Let's build something great.</h2>
+    <p style="color:var(--muted);font-size:1rem;margin-bottom:0.5rem;max-width:600px;line-height:1.8">I'm open to full-time roles, freelance contracts, and technical consulting — whether you're launching a new mobile product or scaling an existing Flutter app to the next level.</p>
+    <p style="color:var(--accent2);font-size:0.88rem;margin-bottom:3rem;font-weight:500">⚡ Typically responds within 24 hours</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;max-width:900px">
+      <a href="mailto:aman.connect.in@gmail.com" class="contact-link">
+        <span class="contact-link-icon">✉️</span>
+        <div><span class="contact-link-label">Email — tap to write</span><span class="contact-link-val">aman.connect.in@gmail.com</span></div>
+      </a>
+      <a href="tel:+916283383829" class="contact-link">
+        <span class="contact-link-icon">📞</span>
+        <div><span class="contact-link-label">Phone — tap to call</span><span class="contact-link-val">+91 6283383829</span></div>
+      </a>
+      <a href="https://linkedin.com/in/aman-yadav-5a78711a1" target="_blank" class="contact-link">
+        <span class="contact-link-icon">💼</span>
+        <div><span class="contact-link-label">LinkedIn — let's connect</span><span class="contact-link-val">aman-yadav-5a78711a1</span></div>
+      </a>
+      <a href="https://github.com/amanyadav70780" target="_blank" class="contact-link">
+        <span class="contact-link-icon">🐙</span>
+        <div><span class="contact-link-label">GitHub — see my code</span><span class="contact-link-val">amanyadav70780</span></div>
+      </a>
+    </div>
+    <div style="margin-top:3rem;padding:2rem;background:rgba(79,124,255,0.05);border:1px solid rgba(79,124,255,0.15);border-radius:16px;max-width:900px">
+      <p style="font-size:0.82rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.75rem">Why hire me</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem">
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--accent2);font-size:1rem;margin-top:2px">✓</span><span style="color:var(--muted);font-size:0.88rem">End-to-end ownership — from architecture to App Store</span></div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--accent2);font-size:1rem;margin-top:2px">✓</span><span style="color:var(--muted);font-size:0.88rem">6 production apps, 100K+ downloads, 99% crash-free</span></div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--accent2);font-size:1rem;margin-top:2px">✓</span><span style="color:var(--muted);font-size:0.88rem">Clean Architecture expert — scalable, maintainable code</span></div>
+        <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--accent2);font-size:1rem;margin-top:2px">✓</span><span style="color:var(--muted);font-size:0.88rem">Fast delivery — 83% CI/CD time reduction track record</span></div>
       </div>
     </div>
   </div>
@@ -762,7 +740,7 @@ footer{
   <div class="footer-socials">
     <a href="https://github.com/amanyadav70780" target="_blank">GitHub</a>
     <a href="https://linkedin.com/in/aman-yadav-5a78711a1" target="_blank">LinkedIn</a>
-    <a href="mailto:aman.connect.in@gmail.com">Email</a>
+    <a href="mailto:aman.connect.in@gmail.com" target="_blank">Email ↗</a>
   </div>
 </footer>
 
