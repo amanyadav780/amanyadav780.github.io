@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Aman Yadav — Senior Flutter Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Epilogue:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#060810;
+  --surface:#0d1020;
+  --card:#111428;
+  --border:rgba(99,140,255,0.12);
+  --border-hover:rgba(99,140,255,0.35);
+  --accent:#4f7cff;
+  --accent2:#00d4aa;
+  --accent3:#ff6b6b;
+  --text:#e8eeff;
+  --muted:#6b7a9e;
+  --dim:#3a4468;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Epilogue',sans-serif;
+  font-size:16px;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+/* CURSOR GLOW */
+.glow{
+  position:fixed;width:400px;height:400px;
+  background:radial-gradient(circle,rgba(79,124,255,0.06) 0%,transparent 70%);
+  border-radius:50%;pointer-events:none;z-index:0;
+  transform:translate(-50%,-50%);transition:opacity 0.3s;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.2rem 5rem;
+  background:rgba(6,8,16,0.8);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Clash Display',sans-serif;
+  font-weight:700;font-size:1.4rem;
+  background:linear-gradient(135deg,#4f7cff,#00d4aa);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:-0.5px;
+}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:0.85rem;font-weight:400;letter-spacing:0.3px;transition:color 0.2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{
+  background:var(--accent);color:#fff;
+  border:none;padding:0.55rem 1.4rem;border-radius:6px;
+  font-family:'Epilogue',sans-serif;font-size:0.85rem;font-weight:500;
+  cursor:pointer;text-decoration:none;transition:opacity 0.2s;
+}
+.nav-cta:hover{opacity:0.85}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:8rem 5rem 4rem;
+  position:relative;overflow:hidden;
+}
+.hero-bg-lines{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(79,124,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg,rgba(79,124,255,0.03) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.hero-orb1{
+  position:absolute;top:-150px;right:-100px;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(79,124,255,0.1) 0%,transparent 65%);
+  pointer-events:none;animation:pulse 6s ease-in-out infinite;
+}
+.hero-orb2{
+  position:absolute;bottom:-200px;left:10%;
+  width:500px;height:500px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,212,170,0.07) 0%,transparent 65%);
+  pointer-events:none;animation:pulse 8s ease-in-out infinite reverse;
+}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.05);opacity:0.7}}
+
+.hero-available{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:0.75rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--accent2);margin-bottom:2rem;
+  opacity:0;animation:fadeUp 0.7s 0.2s forwards;
+}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+.hero h1{
+  font-family:'Clash Display',sans-serif;
+  font-size:clamp(3.2rem,7vw,6rem);
+  font-weight:700;line-height:1.0;
+  letter-spacing:-2.5px;
+  margin-bottom:1.5rem;
+  opacity:0;animation:fadeUp 0.7s 0.35s forwards;
+}
+.hero h1 .line2{color:var(--accent)}
+.hero h1 .line3{
+  background:linear-gradient(135deg,var(--accent2),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-meta{
+  display:flex;align-items:center;gap:1.5rem;
+  font-size:0.85rem;color:var(--muted);
+  margin-bottom:1.5rem;
+  opacity:0;animation:fadeUp 0.7s 0.5s forwards;
+}
+.hero-meta span{display:flex;align-items:center;gap:6px}
+.pipe{color:var(--dim)}
+.hero-desc{
+  max-width:540px;color:var(--muted);font-size:1.05rem;
+  margin-bottom:2.5rem;font-style:italic;
+  opacity:0;animation:fadeUp 0.7s 0.65s forwards;
+}
+.hero-btns{
+  display:flex;gap:1rem;flex-wrap:wrap;
+  opacity:0;animation:fadeUp 0.7s 0.8s forwards;
+}
+.btn-primary{
+  background:var(--accent);color:#fff;
+  border:none;padding:0.85rem 2.2rem;border-radius:8px;
+  font-family:'Epilogue',sans-serif;font-size:0.9rem;font-weight:500;
+  cursor:pointer;text-decoration:none;
+  transition:transform 0.15s,opacity 0.2s;display:inline-block;
+}
+.btn-primary:hover{transform:translateY(-2px);opacity:0.9}
+.btn-ghost{
+  background:transparent;color:var(--text);
+  border:1px solid var(--border-hover);padding:0.85rem 2.2rem;border-radius:8px;
+  font-family:'Epilogue',sans-serif;font-size:0.9rem;font-weight:500;
+  cursor:pointer;text-decoration:none;
+  transition:transform 0.15s,border-color 0.2s;display:inline-block;
+}
+.btn-ghost:hover{transform:translateY(-2px);border-color:rgba(99,140,255,0.6)}
+
+.hero-stats{
+  display:flex;gap:3rem;margin-top:4rem;
+  padding-top:3rem;border-top:1px solid var(--border);
+  opacity:0;animation:fadeUp 0.7s 1s forwards;
+}
+.stat-num{font-family:'Clash Display',sans-serif;font-size:2.2rem;font-weight:700;color:var(--accent);letter-spacing:-1px}
+.stat-label{font-size:0.78rem;color:var(--muted);letter-spacing:0.5px;text-transform:uppercase;margin-top:2px}
+
+/* SECTIONS */
+section{padding:6rem 5rem;position:relative}
+.s-label{
+  font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent2);font-weight:500;margin-bottom:0.6rem;
+  display:flex;align-items:center;gap:10px;
+}
+.s-label::before{content:'';width:20px;height:1px;background:var(--accent2)}
+.s-title{
+  font-family:'Clash Display',sans-serif;
+  font-size:clamp(2rem,4vw,2.8rem);font-weight:700;
+  letter-spacing:-1.5px;margin-bottom:1rem;
+}
+.s-sub{color:var(--muted);max-width:500px;font-size:0.95rem;margin-bottom:3rem}
+
+/* EXPERIENCE */
+.exp-list{display:flex;flex-direction:column;gap:0}
+.exp-item{
+  display:grid;grid-template-columns:200px 1fr;
+  gap:0 3rem;
+  padding:2.5rem 0;
+  border-bottom:1px solid var(--border);
+  position:relative;
+}
+.exp-item:last-child{border-bottom:none}
+.exp-left{}
+.exp-period{font-size:0.8rem;color:var(--muted);letter-spacing:0.5px;margin-bottom:0.3rem}
+.exp-company{font-family:'Clash Display',sans-serif;font-weight:600;font-size:1rem;color:var(--text)}
+.exp-location{font-size:0.78rem;color:var(--dim);margin-top:3px}
+.exp-right{}
+.exp-role{
+  font-family:'Clash Display',sans-serif;font-weight:600;font-size:1.15rem;
+  color:var(--accent);margin-bottom:0.8rem;
+}
+.exp-points{list-style:none;display:flex;flex-direction:column;gap:0.55rem}
+.exp-points li{
+  font-size:0.88rem;color:var(--muted);
+  padding-left:1.2rem;position:relative;line-height:1.6;
+}
+.exp-points li::before{
+  content:'→';position:absolute;left:0;
+  color:var(--accent);font-size:0.75rem;top:1px;
+}
+.exp-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:1rem}
+.exp-tag{
+  font-size:0.7rem;padding:0.2rem 0.65rem;border-radius:4px;
+  background:rgba(79,124,255,0.08);color:var(--accent);
+  border:1px solid rgba(79,124,255,0.2);
+}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.proj-card{
+  background:var(--card);
+  border:1px solid var(--border);border-radius:16px;
+  padding:2rem;
+  transition:border-color 0.2s,transform 0.2s;
+  position:relative;overflow:hidden;
+}
+.proj-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  opacity:0;transition:opacity 0.3s;
+}
+.proj-card:hover{border-color:var(--border-hover);transform:translateY(-4px)}
+.proj-card:hover::before{opacity:1}
+.proj-badge{
+  display:inline-block;font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--accent2);margin-bottom:1rem;font-weight:500;
+}
+.proj-card h3{font-family:'Clash Display',sans-serif;font-weight:600;font-size:1.1rem;margin-bottom:0.5rem;color:var(--text)}
+.proj-highlight{
+  font-size:0.78rem;color:var(--accent3);font-weight:500;margin-bottom:0.75rem;
+  display:flex;align-items:center;gap:5px;
+}
+.proj-card p{color:var(--muted);font-size:0.85rem;margin-bottom:1.25rem;line-height:1.65}
+.proj-stack{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.25rem}
+.stack-chip{
+  font-size:0.72rem;padding:0.22rem 0.6rem;border-radius:4px;
+  background:rgba(255,255,255,0.04);color:var(--muted);
+  border:1px solid var(--border);
+}
+.proj-links{display:flex;gap:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+.proj-link{
+  font-size:0.8rem;color:var(--muted);text-decoration:none;
+  transition:color 0.2s;display:flex;align-items:center;gap:4px;
+}
+.proj-link:hover{color:var(--accent)}
+
+/* SKILLS */
+.skills-section{background:var(--surface)}
+.skills-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
+.skill-group{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;
+}
+.skill-group-title{
+  font-family:'Clash Display',sans-serif;font-weight:600;font-size:0.85rem;
+  color:var(--text);margin-bottom:1rem;letter-spacing:0.3px;
+  display:flex;align-items:center;gap:8px;
+}
+.skill-group-icon{font-size:1rem}
+.skill-chips{display:flex;flex-wrap:wrap;gap:0.5rem}
+.skill-chip{
+  font-size:0.75rem;padding:0.3rem 0.75rem;border-radius:6px;
+  background:rgba(79,124,255,0.06);color:var(--muted);
+  border:1px solid var(--border);transition:all 0.2s;cursor:default;
+}
+.skill-chip:hover{background:rgba(79,124,255,0.14);border-color:var(--border-hover);color:var(--text)}
+
+/* ACHIEVEMENTS */
+.achievements-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem}
+.ach-card{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:1.75rem;transition:border-color 0.2s;
+}
+.ach-card:hover{border-color:var(--border-hover)}
+.ach-num{
+  font-family:'Clash Display',sans-serif;font-size:2rem;font-weight:700;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:0.3rem;letter-spacing:-1px;
+}
+.ach-title{font-size:0.88rem;font-weight:500;color:var(--text);margin-bottom:0.3rem}
+.ach-desc{font-size:0.78rem;color:var(--muted);line-height:1.5}
+
+/* CONTACT */
+.contact-section{
+  background:var(--surface);
+  border-radius:24px;margin:0 3rem 4rem;padding:5rem;
+}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.contact-links{display:flex;flex-direction:column;gap:1rem;margin-top:2rem}
+.contact-link{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem 1.25rem;border-radius:10px;
+  border:1px solid var(--border);background:var(--card);
+  text-decoration:none;color:var(--text);
+  transition:border-color 0.2s,transform 0.15s;
+  font-size:0.88rem;
+}
+.contact-link:hover{border-color:var(--border-hover);transform:translateX(4px)}
+.contact-link-icon{font-size:1.1rem;width:28px;text-align:center}
+.contact-link-label{color:var(--muted);font-size:0.75rem;display:block}
+.contact-link-val{color:var(--text)}
+.contact-form{display:flex;flex-direction:column;gap:1rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-group{display:flex;flex-direction:column;gap:0.4rem}
+.form-group label{font-size:0.75rem;color:var(--muted);letter-spacing:0.5px;text-transform:uppercase}
+.form-group input,.form-group textarea,.form-group select{
+  background:var(--bg);border:1px solid var(--border);border-radius:8px;
+  padding:0.8rem 1rem;color:var(--text);
+  font-family:'Epilogue',sans-serif;font-size:0.9rem;
+  transition:border-color 0.2s;outline:none;
+}
+.form-group input:focus,.form-group textarea:focus{border-color:rgba(79,124,255,0.5)}
+.form-group textarea{resize:vertical;min-height:120px}
+
+/* FOOTER */
+footer{
+  padding:2rem 5rem;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  color:var(--muted);font-size:0.82rem;
+}
+.footer-socials{display:flex;gap:1.5rem}
+.footer-socials a{color:var(--muted);text-decoration:none;transition:color 0.2s}
+.footer-socials a:hover{color:var(--text)}
+
+/* DIVIDER */
+.divider{width:60px;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;margin-bottom:2rem}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .nav-links,.nav-cta{display:none}
+  .hero,section{padding:6rem 1.5rem 3rem}
+  .hero-stats{gap:2rem;flex-wrap:wrap}
+  .exp-item{grid-template-columns:1fr}
+  .exp-left{margin-bottom:0.5rem}
+  .contact-section{margin:0 0 2rem;padding:3rem 1.5rem;border-radius:0}
+  .contact-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:1rem;padding:1.5rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<div class="glow" id="glow"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">aman.dev</div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:aman.connect.in@gmail.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-lines"></div>
+  <div class="hero-orb1"></div>
+  <div class="hero-orb2"></div>
+
+  <div class="hero-available">
+    <span class="dot"></span>
+    Open to new opportunities
+  </div>
+
+  <h1>
+    Aman<br/>
+    <span class="line2">Yadav</span><br/>
+    <span class="line3">Flutter Dev</span>
+  </h1>
+
+  <div class="hero-meta">
+    <span>📍 Gurugram, Haryana</span>
+    <span class="pipe">|</span>
+    <span>📱 Android & iOS</span>
+    <span class="pipe">|</span>
+    <span>⚡ 3.7+ Years</span>
+  </div>
+
+  <p class="hero-desc">
+    Senior Flutter Developer. Shipped 6 production apps with 100,000+ combined downloads — across fintech, insurtech, agritech & CRM — with a 99% crash-free rate.
+  </p>
+
+  <div class="hero-btns">
+    <a href="#projects" class="btn-primary">View My Work</a>
+    <a href="#contact" class="btn-ghost">Get In Touch</a>
+    <a href="https://github.com/amanyadav70780" target="_blank" class="btn-ghost">GitHub ↗</a>
+  </div>
+
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">6</div>
+      <div class="stat-label">Production Apps</div>
+    </div>
+    <div>
+      <div class="stat-num">100K+</div>
+      <div class="stat-label">Downloads</div>
+    </div>
+    <div>
+      <div class="stat-num">99%</div>
+      <div class="stat-label">Crash-Free Rate</div>
+    </div>
+    <div>
+      <div class="stat-num">83%</div>
+      <div class="stat-label">CI/CD Time Saved</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="s-label">Where I've Worked</div>
+  <h2 class="s-title">Experience</h2>
+  <div class="divider"></div>
+
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <div class="exp-period">Oct 2024 — Present</div>
+        <div class="exp-company">Intileo Technologies</div>
+        <div class="exp-location">Gurugram, India</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-role">Senior Flutter Developer</div>
+        <ul class="exp-points">
+          <li>Led end-to-end development across 4 live Flutter products: OPDsure, MNGL, LeadsUp, and AstroChats using Flutter 3.x and Bloc.</li>
+          <li>Introduced GetIt DI and Bloc/Cubit architecture across all products, improving modularity and testability.</li>
+          <li>Built offline-first data layer using Hive; integrated Razorpay and Firebase FCM with deep-link routing.</li>
+          <li>Drove crash rate below 1% via Dio interceptors, null safety, and Crashlytics; mentored junior dev, cutting PR cycles from 3 rounds to 1.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Flutter 3.x</span>
+          <span class="exp-tag">Bloc/Cubit</span>
+          <span class="exp-tag">GetIt</span>
+          <span class="exp-tag">Hive</span>
+          <span class="exp-tag">Razorpay</span>
+          <span class="exp-tag">Firebase</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <div class="exp-period">Jun 2023 — Sep 2024</div>
+        <div class="exp-company">Snakescript Solutions</div>
+        <div class="exp-location">Mohali, India</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-role">Flutter Developer</div>
+        <ul class="exp-points">
+          <li>Delivered 5 production apps across insurance, healthcare, agritech, and astrology — including AstroChats (100K+ downloads) and a Government of India app.</li>
+          <li>Led Clean Architecture migration from monolithic codebase, reducing time-to-feature by 40%.</li>
+          <li>Automated iOS release via Fastlane, cutting deployment time from 2 hours to 20 minutes — an 83% reduction.</li>
+          <li>Maintained below 2% post-release bug rate across all shipped apps.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Flutter</span>
+          <span class="exp-tag">GetX</span>
+          <span class="exp-tag">Provider</span>
+          <span class="exp-tag">Fastlane</span>
+          <span class="exp-tag">Clean Architecture</span>
+          <span class="exp-tag">MVVM</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-left">
+        <div class="exp-period">Jul 2022 — May 2023</div>
+        <div class="exp-company">Codobux IT Services</div>
+        <div class="exp-location">Mohali, India</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-role">Android Developer</div>
+        <ul class="exp-points">
+          <li>Developed and shipped native Android apps in Kotlin using MVVM and MVC, from UI to Play Store deployment.</li>
+          <li>Optimised UI rendering from 45 FPS to 60 FPS on mid-range Android devices via Android Profiler and overdraw reduction.</li>
+          <li>Maintained below 2% bug reopen rate across 10 months through Kotlin null safety best practices.</li>
+        </ul>
+        <div class="exp-tags">
+          <span class="exp-tag">Kotlin</span>
+          <span class="exp-tag">Android SDK</span>
+          <span class="exp-tag">MVVM</span>
+          <span class="exp-tag">REST APIs</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background:var(--surface)">
+  <div class="s-label">Things I've Built</div>
+  <h2 class="s-title">Featured Projects</h2>
+  <p class="s-sub">Production apps shipped on the Play Store and App Store — with real users and real impact.</p>
+
+  <div class="projects-grid">
+
+    <div class="proj-card">
+      <div class="proj-badge">Astrology · Android & iOS</div>
+      <h3>AstroChats</h3>
+      <div class="proj-highlight">⭐ 100,000+ Downloads</div>
+      <p>Dual-app platform (user + astrologer) with real-time WebSocket chat, role-based session management, and Razorpay payment integration. Zero forced rollbacks on launch.</p>
+      <div class="proj-stack">
+        <span class="stack-chip">Flutter</span>
+        <span class="stack-chip">Bloc</span>
+        <span class="stack-chip">WebSocket</span>
+        <span class="stack-chip">Razorpay</span>
+        <span class="stack-chip">Firebase Analytics</span>
+        <span class="stack-chip">FCM</span>
+        <span class="stack-chip">Google Maps SDK</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/amanyadav70780" target="_blank" class="proj-link">↗ GitHub</a>
+        <a href="#" class="proj-link">↗ Play Store</a>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-badge">Agritech · Government of India</div>
+      <h3>Mitra Kapas</h3>
+      <div class="proj-highlight">🏛 Ministry of Textiles</div>
+      <p>Government-grade agritech marketplace connecting cotton farmers and buyers. Strict compliance standards, geo-location via Google Maps, and dual payment gateways (BillDesk + Razorpay).</p>
+      <div class="proj-stack">
+        <span class="stack-chip">Flutter</span>
+        <span class="stack-chip">Firebase Firestore</span>
+        <span class="stack-chip">Google Maps SDK</span>
+        <span class="stack-chip">BillDesk</span>
+        <span class="stack-chip">Razorpay</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/amanyadav70780" target="_blank" class="proj-link">↗ GitHub</a>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-badge">Insurtech · Android & iOS</div>
+      <h3>OPDsure</h3>
+      <div class="proj-highlight">🔐 Multi-gateway Payments</div>
+      <p>Insurance app with policy browsing, claims tracking, and multi-gateway payments (Stripe + BillDesk). Clean separation of UI, business logic, and data layers for fast onboarding.</p>
+      <div class="proj-stack">
+        <span class="stack-chip">Flutter</span>
+        <span class="stack-chip">Bloc</span>
+        <span class="stack-chip">MVVM</span>
+        <span class="stack-chip">Hive</span>
+        <span class="stack-chip">Stripe</span>
+        <span class="stack-chip">BillDesk</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/amanyadav70780" target="_blank" class="proj-link">↗ GitHub</a>
+      </div>
+    </div>
+
+    <div class="proj-card">
+      <div class="proj-badge">Healthcare · Android & iOS</div>
+      <h3>HHA365</h3>
+      <div class="proj-highlight">📅 Appointment Booking</div>
+      <p>Healthcare appointment booking app with a full FCM push notification system — background handling, custom notification channels, and deep-link routing on both platforms.</p>
+      <div class="proj-stack">
+        <span class="stack-chip">Flutter</span>
+        <span class="stack-chip">Firebase FCM</span>
+        <span class="stack-chip">REST APIs</span>
+        <span class="stack-chip">Deep Links</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/amanyadav70780" target="_blank" class="proj-link">↗ GitHub</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="skills-section">
+  <div class="s-label">My Toolkit</div>
+  <h2 class="s-title">Skills & Technologies</h2>
+  <div class="skills-groups">
+    <div class="skill-group">
+      <div class="skill-group-title"><span class="skill-group-icon">📱</span> Languages & Frameworks</div>
+      <div class="skill-chips">
+        <span class="skill-chip">Flutter</span>
+        <span class="skill-chip">Dart</span>
+        <span class="skill-chip">Kotlin</span>
+        <span class="skill-chip">Android SDK</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title"><span class="skill-group-icon">🏗</span> Architecture</div>
+      <div class="skill-chips">
+        <span class="skill-chip">Clean Architecture</span>
+        <span class="skill-chip">MVVM</span>
+        <span class="skill-chip">MVC</span>
+        <span class="skill-chip">SOLID</span>
+        <span class="skill-chip">Repository Pattern</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title"><span class="skill-group-icon">⚙️</span> State Management</div>
+      <div class="skill-chips">
+        <span class="skill-chip">Bloc</span>
+        <span class="skill-chip">Cubit</span>
+        <span class="skill-chip">Provider</span>
+        <span class="skill-chip">GetX</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title"><span class="skill-group-icon">🔥</span> Firebase</div>
+      <div class="skill-chips">
+        <span class="skill-chip">Auth</span>
+        <span class="skill-chip">Firestore</span>
+        <span class="skill-chip">FCM</span>
+        <span class="skill-chip">Analytics</span>
+        <span class="skill-chip">Crashlytics</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title"><span class="skill-group-icon">💳</span> Payments & Maps</div>
+      <div class="skill-chips">
+        <span class="skill-chip">Razorpay</span>
+        <span class="skill-chip">Stripe</span>
+        <span class="skill-chip">BillDesk</span>
+        <span class="skill-chip">Google Maps SDK</span>
+        <span class="skill-chip">Places API</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title"><span class="skill-group-icon">🚀</span> CI/CD & Release</div>
+      <div class="skill-chips">
+        <span class="skill-chip">Jenkins</span>
+        <span class="skill-chip">Fastlane</span>
+        <span class="skill-chip">Play Store Console</span>
+        <span class="skill-chip">App Store Connect</span>
+        <span class="skill-chip">TestFlight</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title"><span class="skill-group-icon">🌐</span> Networking</div>
+      <div class="skill-chips">
+        <span class="skill-chip">REST APIs</span>
+        <span class="skill-chip">WebSocket</span>
+        <span class="skill-chip">Dio</span>
+        <span class="skill-chip">Dio Interceptors</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title"><span class="skill-group-icon">🛠</span> Tools & Process</div>
+      <div class="skill-chips">
+        <span class="skill-chip">Git</span>
+        <span class="skill-chip">Jira</span>
+        <span class="skill-chip">Postman</span>
+        <span class="skill-chip">Xcode</span>
+        <span class="skill-chip">Android Studio</span>
+        <span class="skill-chip">Agile/Scrum</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="s-label">By the Numbers</div>
+  <h2 class="s-title">Key Achievements</h2>
+  <div class="achievements-grid">
+    <div class="ach-card">
+      <div class="ach-num">100K+</div>
+      <div class="ach-title">Downloads — AstroChats</div>
+      <div class="ach-desc">Dual-app Flutter platform on Android & iOS with real-time WebSocket chat.</div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-num">83%</div>
+      <div class="ach-title">CI/CD Time Reduction</div>
+      <div class="ach-desc">Deployment cut from 2 hours to 20 minutes using Jenkins and Fastlane.</div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-num">99%</div>
+      <div class="ach-title">Crash-Free Rate</div>
+      <div class="ach-desc">Achieved across all production apps via Bloc, Dio interceptors & Crashlytics.</div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-num">60 FPS</div>
+      <div class="ach-title">UI Rendering Optimised</div>
+      <div class="ach-desc">Improved from 45 FPS on mid-range Android devices via Profiler & overdraw reduction.</div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-num">40%</div>
+      <div class="ach-title">Faster Feature Delivery</div>
+      <div class="ach-desc">Achieved via Clean Architecture migration from monolithic codebase at Snakescript.</div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-num">6</div>
+      <div class="ach-title">Production Apps Shipped</div>
+      <div class="ach-desc">Across fintech, insurtech, agritech, healthcare, and CRM domains.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="padding:0 0 4rem">
+  <div class="contact-section">
+    <div class="contact-grid">
+      <div>
+        <div class="s-label">Let's Connect</div>
+        <h2 class="s-title">Open to new projects & roles</h2>
+        <p style="color:var(--muted);font-size:0.95rem;margin-bottom:2rem">Whether you're building a mobile product from scratch or scaling an existing Flutter app — I'd love to hear about it.</p>
+        <div class="contact-links">
+          <a href="mailto:aman.connect.in@gmail.com" class="contact-link">
+            <span class="contact-link-icon">✉️</span>
+            <div><span class="contact-link-label">Email</span><span class="contact-link-val">aman.connect.in@gmail.com</span></div>
+          </a>
+          <a href="tel:+916283383829" class="contact-link">
+            <span class="contact-link-icon">📞</span>
+            <div><span class="contact-link-label">Phone</span><span class="contact-link-val">+91 6283383829</span></div>
+          </a>
+          <a href="https://linkedin.com/in/aman-yadav-5a78711a1" target="_blank" class="contact-link">
+            <span class="contact-link-icon">💼</span>
+            <div><span class="contact-link-label">LinkedIn</span><span class="contact-link-val">aman-yadav-5a78711a1</span></div>
+          </a>
+          <a href="https://github.com/amanyadav70780" target="_blank" class="contact-link">
+            <span class="contact-link-icon">🐙</span>
+            <div><span class="contact-link-label">GitHub</span><span class="contact-link-val">amanyadav70780</span></div>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" placeholder="Your name"/>
+            </div>
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" placeholder="your@email.com"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <input type="text" placeholder="e.g. Flutter project opportunity"/>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Tell me about your project or role..."></textarea>
+          </div>
+          <div>
+            <button class="btn-primary" style="width:100%;justify-content:center">Send Message →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>© 2025 Aman Yadav · Senior Flutter Developer · Gurugram, India</div>
+  <div class="footer-socials">
+    <a href="https://github.com/amanyadav70780" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/aman-yadav-5a78711a1" target="_blank">LinkedIn</a>
+    <a href="mailto:aman.connect.in@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+const glow = document.getElementById('glow');
+document.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
+</script>
+</body>
+</html>
